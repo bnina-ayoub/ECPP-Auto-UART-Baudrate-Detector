@@ -30,7 +30,7 @@ The auto baud rate detection likely works through the following steps:
 
 The code likely involves a state machine (`RECEIVE` state as seen in previous discussions) to manage the different phases of the detection process. The timing calculations might involve comparing measured time intervals against expected bit durations for common baud rates.
 
-## Key Challenges and Solutions Explored (Based on Conversation)
+## Key Challenges and Solutions Explored
 
 * **Precise Timing:** Using a Timer in Input Capture mode is crucial for accurately measuring the bit durations.
 * **Handling Start Bit:** Correctly identifying the start bit and measuring the subsequent bit timings from there.
@@ -38,18 +38,6 @@ The code likely involves a state machine (`RECEIVE` state as seen in previous di
 * **Baud Rate Calculation Logic:** Implementing the correct mathematical logic to convert the measured time intervals to a baud rate. The calculation involving `HAL_RCC_GetPCLK2Freq()` and `elapsed_time` was likely part of this.
 * **Tolerance:** Accounting for slight variations in the sender's baud rate. The `if(abs(baudrate - 115200) < 9)` check suggests a tolerance window.
 * **Potential Issues:** The program getting stuck in the `Default_Handler` likely indicated an unhandled interrupt related to the Timer or UART during the detection process, possibly due to incorrect interrupt configuration or missing handlers.
-
-## Getting Started (If Applicable for Others)
-
-1.  Clone this repository: `git clone [repository URL]`
-2.  This project targets an STM32F4 series microcontroller. Ensure you have the necessary development environment set up (e.g., STM32CubeIDE) along with the STM32 HAL library.
-3.  The code might need adjustments based on the specific STM32F4 variant and the UART port being used for auto-detection.
-
-## Further Development/Learning
-
-* Implementing more robust error handling and timeout mechanisms for the baud rate detection.
-* Supporting a wider range of baud rates.
-* Optimizing the detection algorithm for speed and accuracy.
 
 ## License
 
